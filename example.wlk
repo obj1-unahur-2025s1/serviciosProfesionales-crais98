@@ -106,7 +106,7 @@ class Empresa {
 
 method cantidadDeClientes() = clientes.asList().size()
 
-method tieneACliente(unCliente) = clientes.asList().contains(unCliente)
+method tieneACliente(unSolicitante) = clientes.asList().contains(unSolicitante)
 
 }
 
