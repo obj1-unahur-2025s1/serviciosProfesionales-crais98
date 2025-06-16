@@ -76,6 +76,7 @@ class Universidad {
 class Empresa {
   const empleados = []
   const clientes = #{}
+  var profesionalAdecuado = self.profesionalAdecuadoPara(unSolicitante)
 
   var property honorarios
   method cantidadEmpleadosDe(unaUniversidad) = empleados.count({p=>p.universidad() == unaUniversidad}) 
@@ -94,7 +95,7 @@ class Empresa {
   //ETAPA 4
   method darServicio(unSolicitante) {
     if(self.puedeSatisfacerA(unSolicitante)){
-      self.profesionalAdecuadoPara(unSolicitante).cobrar(self.profesionalAdecuadoPara(unSolicitante).honorarios(1))// un poco largo
+      profesionalAdecuado.cobrar(profesionalAdecuado.honorarios(1))// es más legible ahora
       clientes.add(unSolicitante)
     }
   }
