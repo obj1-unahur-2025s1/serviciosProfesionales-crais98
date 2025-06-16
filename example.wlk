@@ -101,6 +101,13 @@ class Empresa {
   }
 
   method profesionalAdecuadoPara(unSolicitante) = empleados.anyOne({p=>p.puedeAtenderA(unSolicitante)})
+
+// ETAPA 4
+
+method cantidadDeClientes() = clientes.asList().size()
+
+method tieneACliente(unCliente) = clientes.asList().contains(unCliente)
+
 }
 
 //ETAPA 2 SOLICITANTES
