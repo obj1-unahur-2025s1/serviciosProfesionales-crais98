@@ -1,9 +1,70 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "Etapa 1" {
+  var nike
+  var sanMartin
+  var rosario
+  var corrientes
+  var hurlingham
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  var rocio
+  var luciana
+  var juana
+  var melina
+
+  var persona1
+  var institucion1
+  var club1
+
+  method initialize(){
+   sanMartin = new Universidad(provincia="Buenos Aires", honorarios=3500, recaudacion =0)
+   rosario = new Universidad(provincia="Santa Fe", honorarios=2800, recaudacion =0)
+   corrientes = new Universidad(provincia="Corrientes", honorarios=4200, recaudacion =0)
+   hurlingham = new Universidad(provincia="Buenos Aires", honorarios=8800, recaudacion =0)
+
+   juana = new ProfesionalUniversidad(universidad=rosario)
+   melina = new ProfesionalLitoral(universidad=corrientes)
+   
+   rocio = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, recaudacion =0)// lista de habilitado? Santa Fe, Córdoba y Buenos Aires.
+   rocio.agregarProvincias(["Santa Fe", "Buenos Aires, Cordoba"])
+
+   luciana = new ProfesionalLibre(universidad=rosario, honorarios=3200, recaudacion =0) // lista de habilitado? Santa Fe y Entre Ríos.
+   luciana.agregarProvincias(["Santa Fe", "Entre Rios"])
+
+
+   nike = new Empresa(honorarios=3500)
+   nike.contratarEmpleados([juana, melina, rocio, luciana])
+  //ETAPA 2
+   persona1 = new Persona(provincia="Corrientes")
+   institucion1 = new Institucion()
+   institucion1.agregarUniversidades(unaListaDeUniversidades)
+   club1 = new Club()
+   club1.agregarProvincias(listaDeProvincias)
+  }
+  test "una empresa contrata a 4 empleados y 2 personas estudiaron en Rosario" {
+    assert.equals(2, nike.cantidadEmpleadosDe(rosario))
+  }
+  test "una empresa contrata a 4 empleados y 1 persona estudio en Hurlingham" {
+    assert.equals(1, nike.cantidadEmpleadosDe(hurlingham))
+  }
+  test "una empresa contrata a 4 empleados y ninguna estudió en San Martin" {
+    assert.that(nike.cantidadEmpleadosDe(sanMartin)==0)
+  }
+  test "rocio es la profesional mas cara de la empresa" {
+    assert.that(nike.profesionalesCaros() == #{rocio}) // devuelve un conjunto con un solo elemento
+  }
+  test "las universidades formadoras de la empresa son: rosario, corrientes y hurlingham" {
+    assert.that(nike.universidadesFormadoras() == #{corrientes, rosario, hurlingham}) // no importa el orden los conjuntos...creo
+  }
+  test "juana es la profesional mas barata de la empresa" {
+    assert.that(nike.profesionalMasBarato() == juana) // devuelve el elemento, no una coleccion
+  }
+  test "la empresa es acotada" {
+    assert.that(nike.esDeGenteAcotada())
+  }
+  test "la empresa deja de ser de gente acotada si agregamos 2 provincias mas a luciana" {
+    luciana.agregarProvincias(["Corrientes", "Misiones"])
+    assert.notThat(nike.esDeGenteAcotada())
   }
 
 }

@@ -1,0 +1,55 @@
+import example.*
+
+describe "Etapa 2" {
+  var nike
+  var sanMartin
+  var rosario
+  var corrientes
+  var hurlingham
+
+  var rocio
+  var luciana
+  var juana
+  var melina
+
+  var persona1
+  var institucion1
+  var club1
+
+  method initialize(){
+   sanMartin = new Universidad(provincia="Buenos Aires", honorarios=3500, recaudacion=0)
+   rosario = new Universidad(provincia="Santa Fe", honorarios=2800, recaudacion=0)
+   corrientes = new Universidad(provincia="Corrientes", honorarios=4200, recaudacion=0)
+   hurlingham = new Universidad(provincia="Buenos Aires", honorarios=8800, recaudacion=0)
+
+   juana = new ProfesionalUniversidad(universidad=rosario)
+   melina = new ProfesionalLitoral(universidad=corrientes)
+   
+   rocio = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, recaudacion = 0)// lista de habilitado? Santa Fe, Córdoba y Buenos Aires.
+   rocio.agregarProvincias(["Santa Fe", "Buenos Aires", "Cordoba"])
+
+   luciana = new ProfesionalLibre(universidad=rosario, honorarios=3200, recaudacion = 0) // lista de habilitado? Santa Fe y Entre Ríos.
+   luciana.agregarProvincias(["Santa Fe", "Entre Rios"])
+
+
+   nike = new Empresa(honorarios=3500)
+   nike.contratarEmpleados([juana, melina, rocio, luciana])
+  //ETAPA 2
+   persona1 = new Persona(provincia="Buenos Aires")
+   institucion1 = new Institucion()
+   institucion1.agregarUniversidades([rosario])
+   club1 = new Club()
+   club1.agregarProvincias(["Santa Fe"])
+  }
+
+  test "persona1 puede ser atendido por la empresa" {
+    assert.that(nike.puedeSatisfacerA(persona1))  
+  }
+  test "institucion1 puede ser atendida por la empresa" {
+    assert.that(nike.puedeSatisfacerA(institucion1))
+  }
+  test "club1 puede ser atendido por la empresa" {
+    assert.that(nike.puedeSatisfacerA(club1))
+  }
+
+}

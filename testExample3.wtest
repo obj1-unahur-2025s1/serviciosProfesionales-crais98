@@ -1,0 +1,30 @@
+import example.*
+
+var ruben
+var nora
+
+var sanMartin
+var rosario
+var corrientes
+var hurlingham
+
+describe "ETAPA 3" {
+  method initialize(){
+   sanMartin = new Universidad(provincia="Buenos Aires", honorarios=3500, recaudacion=0)
+   rosario = new Universidad(provincia="Santa Fe", honorarios=2800, recaudacion=0)
+   corrientes = new Universidad(provincia="Corrientes", honorarios=4200, recaudacion=0)
+   hurlingham = new Universidad(provincia="Buenos Aires", honorarios=8800, recaudacion=0)
+   
+   ruben = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, recaudacion=10000)
+   nora = new ProfesionalLibre(universidad=hurlingham, honorarios=5000, recaudacion=12000)
+  }
+  
+  test "nora tiene 12000 le da 4000 a ruben y pasa a tener 8000" {
+    nora.pasarDinero(ruben, 4000)
+    assert.equals(8000, nora.totalRecaudado())
+  }
+  test "ruben tiene 10000, y despues de que nora le diera 4000, pasa a tener 14000" {
+    nora.pasarDinero(ruben, 4000)
+    assert.equals(14000, ruben.totalRecaudado())
+  }
+}
